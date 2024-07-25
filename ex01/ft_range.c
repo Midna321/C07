@@ -30,8 +30,8 @@ int *ft_range(int min, int max)
 
 int main()
 {
-	int min = 1;
-	int max = 99;
+	int min = 0;
+	int max = 0;
 	int *numarray = ft_range(min, max);
 	int size = max - min;
 	printf("Array size : %i\n",size);
