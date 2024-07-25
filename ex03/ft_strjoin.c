@@ -18,7 +18,7 @@ char *ft_strjoin(int size, char **strs, char *sep)
 	int	j;
 	int	c;
 
-	int total_lenght;
+	int total_lenght = 0;
 	//Setting i to 1 so it doesn't include size of the program name.
 	i = 1;
 	//Since chars weight 1 byte, we'll calculate the total lenght of the strings plus separator and
@@ -26,6 +26,7 @@ char *ft_strjoin(int size, char **strs, char *sep)
 	while(i < size)
 	{
 		total_lenght+= ft_strlen(strs[i]);
+		printf("%i\n",total_lenght);
 		if(i < size - 1)
 		{
 			total_lenght += ft_strlen(sep);
