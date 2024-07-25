@@ -19,6 +19,7 @@ int 	ft_ultimate_range(int **range, int min, int max)
 	numarray = (int*)malloc(sizeof (int) * (range2));
 	if (numarray == NULL)
 	{
+		*range = NULL;
 		return (-1);
 	}
 	i = 0;
@@ -38,4 +39,5 @@ int main()
 	int min = 1;
 	int max = 21;
 	int num = ft_ultimate_range(&range,min,max);
+	printf("Size of the array %i\n",num);
 }
