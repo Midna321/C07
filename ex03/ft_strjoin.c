@@ -46,6 +46,7 @@ char *ft_strjoin(int size, char **strs, char *sep)
 		j = 0;
 		while(strs[i][j] != '\0')
 		{
+			//Assign characters to concstring from strs.
 			concstring[c++] = strs[i][j++];
 		}
 		//We reset j to 0 to cycle the separator itself to concatenate strings.
@@ -53,8 +54,10 @@ char *ft_strjoin(int size, char **strs, char *sep)
 		//Make it so the last string won't have a separator attached.
 		if(i < size - 1)
 		{
+			//Cycle the separator
 			while(sep[j] != '\0')
 			{
+				//Attach the separator to our string. This is similar behaviour of strcat.
 				concstring[c++] = sep[j++];
 			}
 			//Move to the next string.
