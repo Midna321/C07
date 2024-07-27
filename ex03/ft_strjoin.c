@@ -1,76 +1,68 @@
-#include <stddef.h>
-#include <stdio.h>
 #include <stdlib.h>
-char ft_strlen(char *str)
+
+int	ft_strlen(char *str)
 {
-	int i = 0;
-	while(str[i]!='\0')
-	{
+	int	i;
+
+	i = 0;
+	while (str[i])
 		i++;
-	}
-	return i;
+	return (i);
 }
 
-char *ft_strjoin(int size, char **strs, char *sep)
+int	ft_lenght(char **strs, int size, char *sep)
 {
-	char	*concstring;
+	int	i;
+	int	lenght;
+
+	i = 0;
+	lenght = 0;
+	while (i < size)
+	{
+		lenght += ft_strlen(strs[i]);
+		if (i < size - 1)
+			lenght += ft_strlen(sep);
+		i++;
+	}
+	return (lenght + 1);
+}
+
+char	*ft_strcat(char *dest, char *src)
+{
 	int	i;
 	int	j;
-	int	c;
 
-	int total_lenght = 0;
-	//Setting i to 1 so it doesn't include size of the program name.
-	i = 1;
-	//Since chars weight 1 byte, we'll calculate the total lenght of the strings plus separator and
-	//add it to malloc. We won't need sizeof in this case. 
-	while(i < size)
-	{
-		total_lenght+= ft_strlen(strs[i]);
-		printf("%i\n",total_lenght);
-		if(i < size - 1)
-		{
-			total_lenght += ft_strlen(sep);
-		}
-		i++;
-	}
-	printf("La lunghezza totale è %i\n", total_lenght);
-	concstring = (char*)malloc(total_lenght + 1);
-	if(concstring == NULL)
-		return NULL;
-	c = 0;
-	//Set this to 1 if you don't wanna print the program name.
 	i = 0;
-	//Since Size is the amount of strings, we'll use a while loop to go trough them all.
-	while(i < size)
-	{
-		//We reset j to 0 once we've cycled the first string
-		j = 0;
-		while(strs[i][j] != '\0')
-		{
-			//Assign characters to concstring from strs.
-			concstring[c++] = strs[i][j++];
-		}
-		//We reset j to 0 to cycle the separator itself to concatenate strings.
-		j = 0;
-		//Make it so the last string won't have a separator attached.
-		if(i < size - 1)
-		{
-			//Cycle the separator
-			while(sep[j] != '\0')
-			{
-				//Attach the separator to our string. This is similar behaviour of strcat.
-				concstring[c++] = sep[j++];
-			}
-			//Move to the next string.
-		}
+	j = 0;
+	while (dest[i] != '\0')
 		i++;
-	}
-	concstring[c] = '\0';
-	return concstring;
+	while (src[j] != '\0')
+		dest[i++] = src[j++];
+	dest[i] = '\0';
+	return (dest);
 }
 
-int main(int ac, char **av)
+char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	char *str = ft_strjoin(ac, av, "-");
-	printf("La stringa concatenata  è %s\n", str);
+	char	*concstring;
+	int		i;
+	int		total_lenght;
+
+	if (size == 0)
+	{
+		concstring = malloc(sizeof (char));
+		*concstring = 0;
+		return (concstring);
+	}
+	concstring = (char *) malloc (sizeof (char) * ft_lenght(strs, size, sep));
+	if (concstring == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < size)
+	{
+		concstring = ft_strcat(concstring, strs[i]);
+		if (i < size - 1)
+			concstring = ft_strcat(concstring, sep);
+	}
+	return (concstring);
 }
